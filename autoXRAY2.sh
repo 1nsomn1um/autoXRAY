@@ -30,7 +30,7 @@ echo -e "${YEL}Подготовка официального репозитор�
 apt-get update && apt-get install -y curl gnupg2 ca-certificates lsb-release $KEYRING_PKG jq dnsutils openssl wget tar socat cron
 
 # Добавление ключа и репозитория nginx.org
-curl -4 -fsSL https://nginx.org/keys/nginx_signing.key | gpg --dearmor --yes -o /usr/share/keyrings/nginx-archive-keyring.gpg
+curl -fsSL https://nginx.org/keys/nginx_signing.key | gpg --dearmor --yes -o /usr/share/keyrings/nginx-archive-keyring.gpg
 
 echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] https://nginx.org/packages/$ID $VERSION_CODENAME nginx" \
     | tee /etc/apt/sources.list.d/nginx.list >/dev/null
