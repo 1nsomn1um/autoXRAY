@@ -87,12 +87,12 @@ systemctl enable --now telemt
 echo -e "${GRN}[2/4] Загрузка и сборка tproxy-server...${NC}"
 GO_ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
 mkdir -p /opt/go
-curl -sL "https://go.dev/dl/go1.22.6.linux-${GO_ARCH}.tar.gz" | tar -C /opt/go --strip-components=1 -xz
+curl -4 -sL "https://go.dev/dl/go1.22.6.linux-${GO_ARCH}.tar.gz" | tar -C /opt/go --strip-components=1 -xz
 
 # Скачиваем архив исходников напрямую через curl
 rm -rf /tmp/tproxy-source
 mkdir -p /tmp/tproxy-source
-curl -sL "https://github.com/telegramdesktop/tproxy-server/archive/refs/heads/master.tar.gz" | tar -xz -C /tmp/tproxy-source --strip-components=1
+curl -4 -sL "https://github.com/telegramdesktop/tproxy-server/archive/refs/heads/master.tar.gz" | tar -xz -C /tmp/tproxy-source --strip-components=1
 
 # Статическая сборка (CGO_ENABLED=0 не требует gcc/make)
 cd /tmp/tproxy-source
