@@ -43,14 +43,14 @@ if command -v go &>/dev/null && [ "$(go version | grep -oE 'go1\.[0-9]+' | cut -
 else
     echo "Загрузка временного Go..."
     mkdir -p /opt/go
-    curl -sL "https://go.dev/dl/go1.22.6.linux-${GO_ARCH}.tar.gz" | tar -C /opt/go --strip-components=1 -xz
+    curl -4 -sL "https://go.dev/dl/go1.22.6.linux-${GO_ARCH}.tar.gz" | tar -C /opt/go --strip-components=1 -xz
     GO_BIN="/opt/go/bin/go"
 fi
 
 # Скачивание исходников напрямую архивом (без git)
 TMP_SRC=$(mktemp -d)
 echo "Скачивание исходников tproxy-server..."
-curl -sL "https://github.com/telegramdesktop/tproxy-server/archive/refs/heads/master.tar.gz" | tar -xz -C "$TMP_SRC" --strip-components=1
+curl -4 -sL "https://github.com/telegramdesktop/tproxy-server/archive/refs/heads/master.tar.gz" | tar -xz -C "$TMP_SRC" --strip-components=1
 
 echo "Компиляция бинарника..."
 cd "$TMP_SRC"
